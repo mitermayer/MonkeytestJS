@@ -1,76 +1,291 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <title>Monkeytestjs by TheMonkeys</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Monkeytestjs by TheMonkeys</title>
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Monkeytestjs</h1>
+        <p class="header">The Monkeys global acceptance tests and framework for pulling in page based tests written to work with QUnitRunner </p>
 
-        <header>
-          <h1>Monkeytestjs</h1>
-          <h2>The Monkeys global acceptance tests and framework for pulling in page based tests written to work with QUnitRunner </h2>
-        </header>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/TheMonkeys/MonkeytestJS/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/TheMonkeys/MonkeytestJS/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/TheMonkeys/MonkeytestJS">View On GitHub</a></li>
+        </ul>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/TheMonkeys/MonkeytestJS/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/TheMonkeys/MonkeytestJS/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/TheMonkeys/MonkeytestJS" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/TheMonkeys">TheMonkeys</a></p>
 
-        <hr>
 
-        <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+      </header>
+      <section>
+        <p><a href="https://travis-ci.org/TheMonkeys/MonkeytestJS"><img src="https://travis-ci.org/TheMonkeys/MonkeytestJS.png" alt="Build Status"></a></p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h1>
+<a name="qunit-acceptance-tests" class="anchor" href="#qunit-acceptance-tests"><span class="octicon octicon-link"></span></a>QUnit Acceptance Tests</h1>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>Open index.html to see the current tests specification. New pages and tests can be added by editng the QUnitRunner
+config, towards the bottom of index.html.</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>NOTE: Check the 'No try-catch' option as this is currently causing some tests to fail</p>
+
+<h2>
+<a name="qunitrunner-object" class="anchor" href="#qunitrunner-object"><span class="octicon octicon-link"></span></a>QUnitRunner object</h2>
+
+<p>QUnitRunner is added to the global namespace (window.QUnitRunner) as a singleton object. Kick of the runner with the
+ following command:</p>
+
+<div class="highlight"><pre><span class="nx">QUnitRunner</span><span class="p">.</span><span class="nx">start</span> <span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">pagesToTest</span><span class="p">);</span>
+</pre></div>
+
+<p>config - see QUnitRunner config below.</p>
+
+<p>pagesToTest - an array of the urls of the pages you wish to test, or null for all</p>
+
+<h2>
+<a name="qunitrunner-config" class="anchor" href="#qunitrunner-config"><span class="octicon octicon-link"></span></a>QUnitRunner config</h2>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">envs</span><span class="o">:</span><span class="p">{</span>
+        <span class="nx">production</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'PRODUCTION URL OR PART OF'</span><span class="p">],</span>
+        <span class="nx">beta</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'BETA URL OR PART OF'</span><span class="p">],</span>
+        <span class="nx">stage</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'STAGE URL OR PART OF'</span><span class="p">],</span>
+        <span class="nx">dev</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'DEV URL OR PART OF'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nx">testsDir</span><span class="o">:</span><span class="s1">'/tests/tests/'</span><span class="p">,</span>
+    <span class="nx">globalTests</span> <span class="o">:</span><span class="p">[</span>
+        <span class="s1">'global/html_validate.js'</span><span class="p">,</span>
+        <span class="s1">'global/has_utf8.js'</span>
+    <span class="p">],</span>
+    <span class="nx">pages</span><span class="o">:</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">url</span><span class="o">:</span><span class="s1">'/'</span><span class="p">,</span>
+            <span class="nx">tests</span><span class="o">:</span><span class="p">[</span><span class="s1">'page/age_gate.js'</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nx">url</span><span class="o">:</span><span class="s1">'/entryform/index?gem_id=1'</span><span class="p">,</span>
+            <span class="nx">tests</span><span class="o">:</span><span class="p">[</span>
+                <span class="s1">'page/form_validation.js'</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nx">workspace</span><span class="o">:</span><span class="nb">window</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="nx">jQuery</span><span class="o">:</span><span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span>
+<span class="p">};</span>
+</pre></div>
+
+<p>options.envs: Array - hash of environments, each has has an array of strings that match the url of the environment</p>
+
+<p>options.testsDir: String - directory containing tests. - optional</p>
+
+<p>options.workspace - this it the window or iframe the pages to be tested will be loaded into.</p>
+
+<p>options.jQuery - jQuery object, primary used to to load pages via AJAX and to attached event listeners to the
+workspace.</p>
+
+<p>options.globalTests: Array - tests scripts to be run on every page.</p>
+
+<p>options.pages: Array - pages to run the tests on, pages must contain a 'url' variable and an optional 'tests' array of
+test scripts to run on this page.</p>
+
+<h2>
+<a name="adding-a-page-to-run-tests-against" class="anchor" href="#adding-a-page-to-run-tests-against"><span class="octicon octicon-link"></span></a>Adding a page to run tests against</h2>
+
+<p>Simply add a page object literal to the options.pages array, the pages literal must contain a url variable.</p>
+
+<h2>
+<a name="creating-a-test" class="anchor" href="#creating-a-test"><span class="octicon octicon-link"></span></a>Creating a test</h2>
+
+<p>Add the path to the test script to either the options.globalTests[] array or for a specific page to the pages[].tests[]
+array.</p>
+
+<p>Create a test script file at the path entered above. At the most basic the test script should contain a call to the
+registerTest (name, spec) function. Where the spec object literal must contain at least a load callback and an optional
+setup callback. The load callback is call in the scope of a QUnitRunnerPageTest object which has numerous methods that
+can be chained together to to perform test actions (see QUnitRunnerPageTest methods below). The last chain call should
+be start() - this will start the test:</p>
+
+<div class="highlight"><pre><span class="nx">registerTest</span> <span class="p">(</span><span class="s1">'Hello world test'</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="nx">setup</span><span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// this is run before the test</span>
+            <span class="c1">// use it to do things like clear cookies</span>
+        <span class="p">}</span>
+
+        <span class="p">,</span><span class="nx">load</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// this is the test script</span>
+            <span class="k">this</span>
+            <span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">"Hello?"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">ok</span><span class="p">(</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"Hello world!"</span><span class="p">);</span>
+            <span class="p">})</span>
+            <span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="qunitrunnerpagetest-properties" class="anchor" href="#qunitrunnerpagetest-properties"><span class="octicon octicon-link"></span></a>QUnitRunnerPageTest properties</h2>
+
+<p>As test actions are called within the scope of QUnitRunnerPageTest you can access the objects properties by prefixing
+them with this.property, eg: this.page</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="thispage" class="anchor" href="#thispage"><span class="octicon octicon-link"></span></a>this.page</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Page spec.
+[TO BE COMPLETED]</p>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="thistestspec" class="anchor" href="#thistestspec"><span class="octicon octicon-link"></span></a>this.testSpec</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Test spec.
+[TO BE COMPLETED]</p>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="thisworkspace" class="anchor" href="#thisworkspace"><span class="octicon octicon-link"></span></a>this.workspace</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
+<p>window or iframe containing the page - can be used to access JS objects on the page. eg:
+alert(this.workspace.document.title);</p>
 
-        <footer>
-          Monkeytestjs is maintained by <a href="https://github.com/TheMonkeys">TheMonkeys</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+<h3>
+<a name="thiswindow" class="anchor" href="#thiswindow"><span class="octicon octicon-link"></span></a>this.window</h3>
 
-        
-      </div>
+<p>Same as this.workspace.</p>
+
+<h3>
+<a name="thisrunner" class="anchor" href="#thisrunner"><span class="octicon octicon-link"></span></a>this.runner</h3>
+
+<p>QUnitRunner object.</p>
+
+<h3>
+<a name="this" class="anchor" href="#this"><span class="octicon octicon-link"></span></a>this.$</h3>
+
+<p>JQuery object of the page, shortcut to this.workspace.JQuery.</p>
+
+<h2>
+<a name="qunitrunnerpagetest-utility-methods" class="anchor" href="#qunitrunnerpagetest-utility-methods"><span class="octicon octicon-link"></span></a>QUnitRunnerPageTest utility methods</h2>
+
+<p>Out of the box QUnitRunnerPageTest comes with the following utility methods. These can be used within a test but are not chainable:</p>
+
+<h3>
+<a name="env-" class="anchor" href="#env-"><span class="octicon octicon-link"></span></a>env ()</h3>
+
+<p>Returns the current environment - based on the url of the current page.</p>
+
+<h3>
+<a name="config-" class="anchor" href="#config-"><span class="octicon octicon-link"></span></a>config ()</h3>
+
+<p>Returns the config object passed into QUnitRunner.</p>
+
+<h2>
+<a name="qunitrunnerpagetest-chaintest-methods" class="anchor" href="#qunitrunnerpagetest-chaintest-methods"><span class="octicon octicon-link"></span></a>QUnitRunnerPageTest chain/test methods</h2>
+
+<p>Out of the box QUnitRunnerPageTest comes with the following methods:</p>
+
+<h3>
+<a name="loadpage-urloptional" class="anchor" href="#loadpage-urloptional"><span class="octicon octicon-link"></span></a>loadPage (url[optional])</h3>
+
+<p>Loads a page into the iframe, also waits until page is loaded before moving to the next action in the chain. If you are
+performing tests on an actual page, this will normally be the first call in a test chain.</p>
+
+<h3>
+<a name="loadpagesource-" class="anchor" href="#loadpagesource-"><span class="octicon octicon-link"></span></a>loadPageSource ()</h3>
+
+<p>Loads the source of a page (via AJAX) into this.page.source. Waits until the source is loaded before moving to the next
+chain action. If you are performing test on the page source this will normally be the first call in the test chain.</p>
+
+<h3>
+<a name="test-name-callback-" class="anchor" href="#test-name-callback-"><span class="octicon octicon-link"></span></a>test (name, callback ($){})</h3>
+
+<p>Runs a synchronous QUint test.</p>
+
+<h3>
+<a name="asynctest-name-callback-" class="anchor" href="#asynctest-name-callback-"><span class="octicon octicon-link"></span></a>asyncTest (name, callback ($){})</h3>
+
+<p>Runs an asynchronous QUint test. Must call this.asyncTestDone when the test is complete. Only then will the next chain
+action be called.</p>
+
+<h3>
+<a name="run-callback-" class="anchor" href="#run-callback-"><span class="octicon octicon-link"></span></a>run (callback ($){})</h3>
+
+<p>Runs arbitrary js code on the page, such as submitting a for, then moves to the next chain action.</p>
+
+<h3>
+<a name="asyncrun-callback-" class="anchor" href="#asyncrun-callback-"><span class="octicon octicon-link"></span></a>asyncRun (callback ($){})</h3>
+
+<p>Runs an asynchronous task. Must call this.asyncRunDone when the task is complete. Only then will the next chain
+action be called.</p>
+
+<h3>
+<a name="wait-duration--1000" class="anchor" href="#wait-duration--1000"><span class="octicon octicon-link"></span></a>wait (duration = 1000)</h3>
+
+<p>Waits for duration before moving to next chain task</p>
+
+<h3>
+<a name="waitforpageload-" class="anchor" href="#waitforpageload-"><span class="octicon octicon-link"></span></a>waitForPageLoad ()</h3>
+
+<p>Pause the chain until a page load takes place. Should be used to wait if a form is submitted or a link click is
+triggered. Once the page load is complete it'll move to the next chain action.</p>
+
+<h2>
+<a name="custom-qunitrunnerpagetest-methods" class="anchor" href="#custom-qunitrunnerpagetest-methods"><span class="octicon octicon-link"></span></a>Custom QUnitRunnerPageTest methods</h2>
+
+<p>You can add new QUnitRunnerPageTest methods by adding to the QUnitRunnerPageTest.prototype. eg:</p>
+
+<div class="highlight"><pre><span class="nx">QUnitRunnerPageTest</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">hello</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// local reference to our QUnitRunnerPageTest object - REQUIRED</span>
+    <span class="kd">var</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="c1">// create a chain closure function - REQUIRED</span>
+    <span class="kd">var</span> <span class="nx">chainFn</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">hello</span><span class="p">);</span>
+
+        <span class="c1">// call next to move to next chain action - REQUIRED</span>
+        <span class="nx">_this</span><span class="p">.</span><span class="nx">_next</span><span class="p">();</span>
+    <span class="p">};</span>
+
+    <span class="c1">// add our closure to the chain - REQUIRED</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chainFn</span><span class="p">);</span>
+
+    <span class="c1">// return this to maintain chainability - REQUIRED</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+<p>Custom methods can be chained in exactly the same way:</p>
+
+<div class="highlight"><pre><span class="nx">registerTest</span> <span class="p">(</span><span class="s1">'Alert test'</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="nx">load</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span>
+            <span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"Hello!"</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">"Alert test"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">ok</span><span class="p">(</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"You should have seen the alert"</span><span class="p">);</span>
+            <span class="p">})</span>
+            <span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
     </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
