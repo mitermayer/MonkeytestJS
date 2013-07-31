@@ -23,10 +23,10 @@
     ],
     "pages": [
         {
-            "url": "/tests/core/demo/index.html"
+            "url": "/MonkeytestJS/tests/core/demo/index.html"
         },
         {
-            "url": "/tests/core/demo/index.html?pretendIsAnotherPage=true",
+            "url": "/MonkeytestJS/tests/core/demo/index.html?pretendIsAnotherPage=true",
             "tests": [ "page/demo_page_test.js" ]
         }
     ]
