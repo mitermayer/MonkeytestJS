@@ -184,7 +184,7 @@
     MonkeyTestJS.prototype.start = function (settings) {
 
         this.config = {
-            testsDir: '/stests/', // requires leading and trailing slash or just '/' if root of server
+            testsDir: '/tests/', // requires leading and trailing slash or just '/' if root of server
             pageTests: {},
             globalTests: []
         };
