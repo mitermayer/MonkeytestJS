@@ -6,15 +6,15 @@ registerTest ('Has a Valid HTML According To W3C Validator', {
     },
     load : function () {
         this
-        .asyncTest('Is HTML Valid?',function() {
+        .asyncTest('Is HTML Valid?',function($) {
 
             var self = this;
 
-            $$.post(this.proxyUrl + this.validatorUrl,{fragment:this.page.source})
+            $.post(this.proxyUrl + this.validatorUrl,{fragment:this.page.source})
             .success(function(data) { // we got some validation results
 
                 // images are not in the root so lets change them to the correct path
-                var doc = $$(data.contents.replace(/images\//g, self.imagesFolder)),
+                var doc = $(data.contents.replace(/images\//g, self.imagesFolder)),
                     errors = doc.find('li.msg_err'); // error messages
 
                 if (errors.length) { // invalid page, use the validator messages for the errors.
