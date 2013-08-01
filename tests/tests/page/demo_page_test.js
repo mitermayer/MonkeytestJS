@@ -16,6 +16,7 @@ registerTest ('Demo page test', {
             this.containerElement.style.background = this.otherColor;
             equal(this.containerElement.style.background, this.otherColor, 'Container background should now be ' + self.otherColor );
         })
+        .wait()
 
         .test ("Have container background being restored to its previosu value?",function(){
             this.containerElement.style.background = this.startBackground;
