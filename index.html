@@ -33,178 +33,129 @@
         <p><a href="https://travis-ci.org/TheMonkeys/MonkeytestJS"><img src="https://travis-ci.org/TheMonkeys/MonkeytestJS.png" alt="Build Status"></a></p>
 
 <h1>
-<a name="qunit-acceptance-tests" class="anchor" href="#qunit-acceptance-tests"><span class="octicon octicon-link"></span></a>QUnit Acceptance Tests</h1>
-
-<p>Open index.html to see the current tests specification. New pages and tests can be added by editng the QUnitRunner
-config, towards the bottom of index.html.</p>
-
-<p>NOTE: Check the 'No try-catch' option as this is currently causing some tests to fail</p>
+<a name="monkeytestjs" class="anchor" href="#monkeytestjs"><span class="octicon octicon-link"></span></a>MonkeytestJS</h1>
 
 <h2>
-<a name="qunitrunner-object" class="anchor" href="#qunitrunner-object"><span class="octicon octicon-link"></span></a>QUnitRunner object</h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
 
-<p>QUnitRunner is added to the global namespace (window.QUnitRunner) as a singleton object. Kick of the runner with the
- following command:</p>
+<p>The file <code>config.json</code> include the <strong>options</strong> for the runner:</p>
 
-<div class="highlight"><pre><span class="nx">QUnitRunner</span><span class="p">.</span><span class="nx">start</span> <span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">pagesToTest</span><span class="p">);</span>
-</pre></div>
-
-<p>config - see QUnitRunner config below.</p>
-
-<p>pagesToTest - an array of the urls of the pages you wish to test, or null for all</p>
-
-<h2>
-<a name="qunitrunner-config" class="anchor" href="#qunitrunner-config"><span class="octicon octicon-link"></span></a>QUnitRunner config</h2>
-
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">envs</span><span class="o">:</span><span class="p">{</span>
-        <span class="nx">production</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'PRODUCTION URL OR PART OF'</span><span class="p">],</span>
-        <span class="nx">beta</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'BETA URL OR PART OF'</span><span class="p">],</span>
-        <span class="nx">stage</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'STAGE URL OR PART OF'</span><span class="p">],</span>
-        <span class="nx">dev</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'DEV URL OR PART OF'</span><span class="p">]</span>
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">"envs"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"local"</span><span class="o">:</span> <span class="p">[</span><span class="s2">"LOCAL URL OR PART OF"</span><span class="p">],</span>
+        <span class="s2">"stage"</span><span class="o">:</span> <span class="p">[</span><span class="s2">"STAGE URL OR PART OF"</span><span class="p">],</span>
+        <span class="s2">"beta"</span><span class="o">:</span> <span class="p">[</span><span class="s2">"BETA URL OR PART OF"</span><span class="p">],</span>
+        <span class="s2">"production"</span><span class="o">:</span> <span class="p">[</span><span class="s2">"PRODUCTION URL OR PART OF"</span><span class="p">]</span>
     <span class="p">},</span>
-    <span class="nx">testsDir</span><span class="o">:</span><span class="s1">'tests'</span><span class="p">,</span>
-    <span class="nx">globalTests</span> <span class="o">:</span><span class="p">[</span>
-        <span class="s1">'global/html_validate.js'</span><span class="p">,</span>
-        <span class="s1">'global/has_utf8.js'</span>
+    <span class="s2">"facebook"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"ids"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"local"</span><span class="o">:</span> <span class="s2">"111111111111111"</span><span class="p">,</span>
+            <span class="s2">"stage"</span><span class="o">:</span> <span class="s2">"222222222222222"</span><span class="p">,</span>
+            <span class="s2">"beta"</span><span class="o">:</span> <span class="s2">"333333333333333"</span><span class="p">,</span>
+            <span class="s2">"production"</span><span class="o">:</span> <span class="s2">"444444444444444"</span><span class="p">,</span>
+            <span class="s2">"default"</span><span class="o">:</span> <span class="s2">"000000000000000"</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">"testsDir"</span><span class="o">:</span> <span class="s2">"tests"</span><span class="p">,</span>
+    <span class="s2">"globalTests"</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">"global/is_html_w3c_valid.js"</span><span class="p">,</span>
+        <span class="s2">"global/has_utf8_metatag.js"</span><span class="p">,</span>
+        <span class="s2">"global/has_facebook_appid.js"</span><span class="p">,</span>
+        <span class="s2">"global/has_google_analytics.js"</span>
     <span class="p">],</span>
-    <span class="nx">pages</span><span class="o">:</span><span class="p">[</span>
+    <span class="s2">"pages"</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="nx">url</span><span class="o">:</span><span class="s1">'/'</span><span class="p">,</span>
-            <span class="nx">tests</span><span class="o">:</span><span class="p">[</span><span class="s1">'page/age_gate.js'</span><span class="p">]</span>
+            <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"/tests/core/demo/index.html"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="nx">url</span><span class="o">:</span><span class="s1">'/entryform/index?gem_id=1'</span><span class="p">,</span>
-            <span class="nx">tests</span><span class="o">:</span><span class="p">[</span>
-                <span class="s1">'page/form_validation.js'</span>
-            <span class="p">]</span>
+            <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"/tests/core/demo/index.html?anotherPageUrl=1"</span><span class="p">,</span>
+            <span class="s2">"tests"</span><span class="o">:</span> <span class="p">[</span> <span class="s2">"page/demo_page_test.js"</span> <span class="p">]</span>
         <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="nx">workspace</span><span class="o">:</span><span class="nb">window</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="nx">jQuery</span><span class="o">:</span><span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span>
-<span class="p">};</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
 </pre></div>
 
-<p>options.envs: Array - hash of environments, each has has an array of strings that match the url of the environment</p>
+<hr><h3>
+<a name="optionsenvs---object" class="anchor" href="#optionsenvs---object"><span class="octicon octicon-link"></span></a>options.envs - Object</h3>
 
-<p>options.testsDir: String - directory containing tests. - optional</p>
+<p>This is where your environment is declared, you can specify on the config urls to be matched to a specific environment.</p>
 
-<p>options.workspace - this it the window or iframe the pages to be tested will be loaded into.</p>
+<p>example:</p>
 
-<p>options.jQuery - jQuery object, primary used to to load pages via AJAX and to attached event listeners to the
-workspace.</p>
-
-<p>options.globalTests: Array - tests scripts to be run on every page.</p>
-
-<p>options.pages: Array - pages to run the tests on, pages must contain a 'url' variable and an optional 'tests' array of
-test scripts to run on this page.</p>
-
-<h2>
-<a name="adding-a-page-to-run-tests-against" class="anchor" href="#adding-a-page-to-run-tests-against"><span class="octicon octicon-link"></span></a>Adding a page to run tests against</h2>
-
-<p>Simply add a page object literal to the options.pages array, the pages literal must contain a url variable.</p>
-
-<h2>
-<a name="creating-a-test" class="anchor" href="#creating-a-test"><span class="octicon octicon-link"></span></a>Creating a test</h2>
-
-<p>Add the path to the test script to either the options.globalTests[] array or for a specific page to the pages[].tests[]
-array.</p>
-
-<p>Create a test script file at the path entered above. At the most basic the test script should contain a call to the
-registerTest (name, spec) function. Where the spec object literal must contain at least a load callback and an optional
-setup callback. The load callback is call in the scope of a QUnitRunnerPageTest object which has numerous methods that
-can be chained together to to perform test actions (see QUnitRunnerPageTest methods below). The last chain call should
-be start() - this will start the test:</p>
-
-<div class="highlight"><pre><span class="nx">registerTest</span> <span class="p">(</span><span class="s1">'Hello world test'</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nx">setup</span><span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// this is run before the test</span>
-            <span class="c1">// use it to do things like clear cookies</span>
-        <span class="p">}</span>
-
-        <span class="p">,</span><span class="nx">load</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="c1">// this is the test script</span>
-            <span class="k">this</span>
-            <span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">"Hello?"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">ok</span><span class="p">(</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"Hello world!"</span><span class="p">);</span>
-            <span class="p">})</span>
-            <span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-        <span class="p">}</span>
+<div class="highlight"><pre>
+    <span class="s2">"envs"</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"production"</span><span class="o">:</span> <span class="p">[</span><span class="s2">"mywebsite.com"</span><span class="p">,</span> <span class="s2">"anotheralias"</span><span class="p">]</span>
     <span class="p">}</span>
-<span class="p">);</span>
+
+</pre></div>
+
+<p>if the string "**mywebsite.com**" or "**anotheralias**" is part of the website URL than that environment name will be returned by the <code>.env()</code> (in this case "**production**") method call from a test page. if no environment is found the string "**default**" will be returned.</p>
+
+<p>You can setup as many environments as you wish, bear in mind that if a match is not found "**default**" will be returned.</p>
+
+<hr><h3>
+<a name="optionstestsdir---string" class="anchor" href="#optionstestsdir---string"><span class="octicon octicon-link"></span></a>options.testsDir - String</h3>
+
+<p>This is the locations for MonkeytestJS <strong>based on the root of the website</strong>.</p>
+
+<p>example: <strong><a href="http://mywebsite.com/tests/">http://mywebsite.com/tests/</a></strong></p>
+
+<div class="highlight"><pre><span class="s2">"testsDir"</span><span class="o">:</span> <span class="s2">"tests"</span>
+
+</pre></div>
+
+<hr><h3>
+<a name="optionsglobaltests---array" class="anchor" href="#optionsglobaltests---array"><span class="octicon octicon-link"></span></a>options.globalTests - Array</h3>
+
+<p>Global tests are the tests that will be runned by all pages.</p>
+
+<p>By default MonkeytestJS include 4 default tests:</p>
+
+<pre><code> - is_html_w3c_valid ( checks if the page is valid throught the w3c validator )
+ - has_utf8_metatag ( check for a presence of a utf8 metatag )
+ - has_facebook_appid ( check for the facebookAPP id based on the environment )
+ - has_google_analytics ( check if we have google analytics setup )
+</code></pre>
+
+<p><strong>Removing</strong> or <strong>adding</strong> a test is just a matter of deleting or adding a reference to it:</p>
+
+<div class="highlight"><pre>    <span class="s2">"globalTests"</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">"global/is_html_w3c_valid.js"</span><span class="p">,</span>
+        <span class="s2">"global/has_utf8_metatag.js"</span><span class="p">,</span>
+        <span class="s2">"global/another_test_i_just_created.js"</span>
+    <span class="p">]</span>
+</pre></div>
+
+<hr><h3>
+<a name="optionspages---object" class="anchor" href="#optionspages---object"><span class="octicon octicon-link"></span></a>options.pages - Object</h3>
+
+<p><strong>options.pages.url - String</strong></p>
+
+<p>Url for the page to be tested, based on the root.</p>
+
+<p>example:</p>
+
+<div class="highlight"><pre>    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"/tests/core/demo/index.html"</span>
+</pre></div>
+
+<p><strong>options.pages.tests - Array</strong></p>
+
+<p>Assign custom tests for the page. Custom tests will be runned on the page after the <strong>global tests</strong> have finished.</p>
+
+<p><strong>Url for the tests are based on the <code>testsDir</code></strong></p>
+
+<p>example:</p>
+
+<div class="highlight"><pre>    <span class="s2">"tests"</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">"page/demo_page_test.js"</span>
+    <span class="p">]</span>
 </pre></div>
 
 <h2>
-<a name="qunitrunnerpagetest-properties" class="anchor" href="#qunitrunnerpagetest-properties"><span class="octicon octicon-link"></span></a>QUnitRunnerPageTest properties</h2>
+<a name="monkeytestjs-api" class="anchor" href="#monkeytestjs-api"><span class="octicon octicon-link"></span></a>MonkeytestJS API</h2>
 
-<p>As test actions are called within the scope of QUnitRunnerPageTest you can access the objects properties by prefixing
-them with this.property, eg: this.page</p>
-
-<h3>
-<a name="thispage" class="anchor" href="#thispage"><span class="octicon octicon-link"></span></a>this.page</h3>
-
-<p>Page spec.
-[TO BE COMPLETED]</p>
-
-<h3>
-<a name="thistestspec" class="anchor" href="#thistestspec"><span class="octicon octicon-link"></span></a>this.testSpec</h3>
-
-<p>Test spec.
-[TO BE COMPLETED]</p>
-
-<h3>
-<a name="thisworkspace" class="anchor" href="#thisworkspace"><span class="octicon octicon-link"></span></a>this.workspace</h3>
-
-<p>window or iframe containing the page - can be used to access JS objects on the page. eg:
-alert(this.workspace.document.title);</p>
-
-<h3>
-<a name="thiswindow" class="anchor" href="#thiswindow"><span class="octicon octicon-link"></span></a>this.window</h3>
-
-<p>Same as this.workspace.</p>
-
-<h3>
-<a name="thisrunner" class="anchor" href="#thisrunner"><span class="octicon octicon-link"></span></a>this.runner</h3>
-
-<p>QUnitRunner object.</p>
-
-<h3>
-<a name="this" class="anchor" href="#this"><span class="octicon octicon-link"></span></a>this.$</h3>
-
-<p>JQuery object of the page, shortcut to this.workspace.JQuery.</p>
-
-<h2>
-<a name="qunitrunnerpagetest-utility-methods" class="anchor" href="#qunitrunnerpagetest-utility-methods"><span class="octicon octicon-link"></span></a>QUnitRunnerPageTest utility methods</h2>
-
-<p>Out of the box QUnitRunnerPageTest comes with the following utility methods. These can be used within a test but are not chainable:</p>
-
-<h3>
-<a name="env-" class="anchor" href="#env-"><span class="octicon octicon-link"></span></a>env ()</h3>
-
-<p>Returns the current environment - based on the url of the current page.</p>
-
-<h3>
-<a name="config-" class="anchor" href="#config-"><span class="octicon octicon-link"></span></a>config ()</h3>
-
-<p>Returns the config object passed into QUnitRunner.</p>
-
-<h2>
-<a name="qunitrunnerpagetest-chaintest-methods" class="anchor" href="#qunitrunnerpagetest-chaintest-methods"><span class="octicon octicon-link"></span></a>QUnitRunnerPageTest chain/test methods</h2>
-
-<p>Out of the box QUnitRunnerPageTest comes with the following methods:</p>
-
-<h3>
-<a name="loadpage-urloptional" class="anchor" href="#loadpage-urloptional"><span class="octicon octicon-link"></span></a>loadPage (url[optional])</h3>
-
-<p>Loads a page into the iframe, also waits until page is loaded before moving to the next action in the chain. If you are
-performing tests on an actual page, this will normally be the first call in a test chain.</p>
-
-<h3>
-<a name="loadpagesource-" class="anchor" href="#loadpagesource-"><span class="octicon octicon-link"></span></a>loadPageSource ()</h3>
-
-<p>Loads the source of a page (via AJAX) into this.page.source. Waits until the source is loaded before moving to the next
-chain action. If you are performing test on the page source this will normally be the first call in the test chain.</p>
+<p>This methods are used on the test page.</p>
 
 <h3>
 <a name="test-name-callback-" class="anchor" href="#test-name-callback-"><span class="octicon octicon-link"></span></a>test (name, callback ($){})</h3>
@@ -218,68 +169,101 @@ chain action. If you are performing test on the page source this will normally b
 action be called.</p>
 
 <h3>
-<a name="run-callback-" class="anchor" href="#run-callback-"><span class="octicon octicon-link"></span></a>run (callback ($){})</h3>
+<a name="asynctestdone-" class="anchor" href="#asynctestdone-"><span class="octicon octicon-link"></span></a>asyncTestDone ()</h3>
 
-<p>Runs arbitrary js code on the page, such as submitting a for, then moves to the next chain action.</p>
-
-<h3>
-<a name="asyncrun-callback-" class="anchor" href="#asyncrun-callback-"><span class="octicon octicon-link"></span></a>asyncRun (callback ($){})</h3>
-
-<p>Runs an asynchronous task. Must call this.asyncRunDone when the task is complete. Only then will the next chain
-action be called.</p>
+<p>This needs to be called when an <code>asyncTest()</code> finishes.</p>
 
 <h3>
-<a name="wait-duration--1000" class="anchor" href="#wait-duration--1000"><span class="octicon octicon-link"></span></a>wait (duration = 1000)</h3>
+<a name="loadpage-urloptional" class="anchor" href="#loadpage-urloptional"><span class="octicon octicon-link"></span></a>loadPage (url[optional])</h3>
 
-<p>Waits for duration before moving to next chain task</p>
+<p>Loads a page into the iframe, also waits until page is loaded before moving to the next action in the chain. If you are
+performing tests on an actual page, this will normally be the first call in a test chain.</p>
 
 <h3>
-<a name="waitforpageload-" class="anchor" href="#waitforpageload-"><span class="octicon octicon-link"></span></a>waitForPageLoad ()</h3>
+<a name="wait-function-timeout-throttle" class="anchor" href="#wait-function-timeout-throttle"><span class="octicon octicon-link"></span></a>wait (function, timeout, throttle)</h3>
 
-<p>Pause the chain until a page load takes place. Should be used to wait if a form is submitted or a link click is
-triggered. Once the page load is complete it'll move to the next chain action.</p>
+<p>Waits for expression to be evaluated to true or timeout to happen, keeps checking for experssion on throttle interval.</p>
+
+<h3>
+<a name="env-" class="anchor" href="#env-"><span class="octicon octicon-link"></span></a>env ()</h3>
+
+<p>Returns the current environment - based on the url of the current page. If not match is found it returns "default"</p>
+
+<h3>
+<a name="config-" class="anchor" href="#config-"><span class="octicon octicon-link"></span></a>config ()</h3>
+
+<p>Returns the config object passed into MonkeytestJS.</p>
+
+<p><strong>NOTE</strong></p>
+
+<p><code>config()</code> and <code>env()</code> cant be used for chaining since they dont return <strong>context</strong>, they are meant to be used inside the
+<code>test()</code> or <code>asyncTest()</code>.</p>
 
 <h2>
-<a name="custom-qunitrunnerpagetest-methods" class="anchor" href="#custom-qunitrunnerpagetest-methods"><span class="octicon octicon-link"></span></a>Custom QUnitRunnerPageTest methods</h2>
+<a name="writing-tests" class="anchor" href="#writing-tests"><span class="octicon octicon-link"></span></a>Writing Tests</h2>
 
-<p>You can add new QUnitRunnerPageTest methods by adding to the QUnitRunnerPageTest.prototype. eg:</p>
+<p>Add the path to the test script to either the options.globalTests[] array or for a specific page to the pages[].tests[]
+array.</p>
 
-<div class="highlight"><pre><span class="nx">QUnitRunnerPageTest</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">alert</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">hello</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// local reference to our QUnitRunnerPageTest object - REQUIRED</span>
-    <span class="kd">var</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+<p>Create a test script file at the path entered above. At the most basic the test script should contain a call to the
+registerTest (name, spec) function. Where the spec object literal must contain at least a function callback. An object can
+be passed instead and an optional with a setup and load callback. The load callback is call in the scope of a MonkeytestJSPageTest object
+which methods that should be chained together to to perform test actions (see <strong>MonkeytestJSPageTest</strong> methods above):</p>
 
-    <span class="c1">// create a chain closure function - REQUIRED</span>
-    <span class="kd">var</span> <span class="nx">chainFn</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="nx">hello</span><span class="p">);</span>
-
-        <span class="c1">// call next to move to next chain action - REQUIRED</span>
-        <span class="nx">_this</span><span class="p">.</span><span class="nx">_next</span><span class="p">();</span>
-    <span class="p">};</span>
-
-    <span class="c1">// add our closure to the chain - REQUIRED</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chainFn</span><span class="p">);</span>
-
-    <span class="c1">// return this to maintain chainability - REQUIRED</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
-<span class="p">};</span>
+<div class="highlight"><pre><span class="nx">registerTest</span> <span class="p">(</span><span class="s1">'Hello world test'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this is the test script</span>
+    <span class="k">this</span>
+    <span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">"Hello?"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ok</span><span class="p">(</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"Hello world!"</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">);</span>
 </pre></div>
 
-<p>Custom methods can be chained in exactly the same way:</p>
+<p>This can also be written as</p>
 
-<div class="highlight"><pre><span class="nx">registerTest</span> <span class="p">(</span><span class="s1">'Alert test'</span><span class="p">,</span>
+<div class="highlight"><pre><span class="nx">registerTest</span> <span class="p">(</span><span class="s1">'Hello world test'</span><span class="p">,</span>
     <span class="p">{</span>
-        <span class="nx">load</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">setup</span><span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// this is run before the test</span>
+            <span class="c1">// use it to do things like clear cookies or assign helpers</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">myhelper</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">doSomething</span><span class="p">()</span> <span class="p">{};</span>
+        <span class="p">}</span>
+        <span class="p">,</span><span class="nx">load</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// this is the test script</span>
             <span class="k">this</span>
-            <span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"Hello!"</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">"Alert test"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">ok</span><span class="p">(</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"You should have seen the alert"</span><span class="p">);</span>
-            <span class="p">})</span>
-            <span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+            <span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">"Hello?"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="kd">var</span> <span class="nx">env</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">env</span><span class="p">();</span> <span class="c1">// getting the environment</span>
+                <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">();</span> <span class="c1">// getting the config</span>
+
+                <span class="nx">ok</span><span class="p">(</span> <span class="nx">config</span><span class="p">.</span><span class="nx">foo</span><span class="p">[</span><span class="nx">env</span><span class="p">].</span><span class="nx">bar</span><span class="p">,</span> <span class="s2">"Accessing an item from config on a specific environment"</span> <span class="p">);</span>
+                <span class="nx">ok</span><span class="p">(</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"Hello world!"</span><span class="p">);</span>
+            <span class="p">});</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </pre></div>
+
+<p>Refer to example test on: <code>./tests/page/demo_page_test.js</code></p>
+
+<hr><h3>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h3>
+
+<ul>
+<li>Kynan Stewart Hughes - <a href="https://github.com/k7n4n5t3w4rt" class="user-mention">@k7n4n5t3w4rt</a>
+</li>
+<li>Thomas Garrood - <a href="https://github.com/sandboxdigital" class="user-mention">@sandboxdigital</a>
+</li>
+<li>Mitermayer Reis - <a href="https://github.com/mitermayer" class="user-mention">@mitermayer</a>
+</li>
+<li>Peter Feltham  - <a href="https://github.com/felthy" class="user-mention">@felthy</a>
+</li>
+</ul><p><strong>Change log</strong></p>
+
+<ul>
+<li>
+<strong>1.0.0</strong> - Initial release.</li>
+</ul>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
